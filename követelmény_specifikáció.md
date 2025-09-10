@@ -47,8 +47,13 @@ MIT licence, a projekt egy hosszútávú támogatottságú játékmotorban kész
 
 ##### Fogalomszótár:
 Biom: Egy különböző tájjal, növényekkel és állatokkal rendelkező területet jelent a játék világán belül (pl. erdő, sivatag, hómező).
+
 Pixel art: egy digitális művészeti stílus, amelyben a képet apró képpontokból (pixelekből) építik fel, és ezeket tudatosan láthatóan „szögletesen” hagyják.
+
 Immerzió: Az immerzív szó azt jelenti, hogy valami annyira magával ragadó vagy valósághű, hogy teljesen belemerülsz az élménybe, mintha benne lennél az adott környezetben vagy eseményben.
+
 High score: Legmagasabb elért pontszám.
+
 Endless runner: Egy videojáték műfaj, amelyben a játékos karaktere folyamatosan halad előre, és a cél az, hogy minél tovább túlélj anélkül, hogy nekiütköznél akadályoknak vagy meghalnál.
+
 8-bit: Játékokban és művészetekben egy retró, pixeles, egyszerű stílust jelöl.
