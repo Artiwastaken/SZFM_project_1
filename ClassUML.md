@@ -1,5 +1,5 @@
 
-![alt](Images/UMLClassDiagram1.png)
+![alt](Images/UMLClassDiagram2.png)
 
 #### PlantUML Script:
 ```
@@ -82,7 +82,16 @@ class UIManager{
 
 
 
-
+GameManager --> BiomeManager
+GameManager --> PlayerController
+GameManager --> RadioController
+SoundEffectController --> GameManager
+SoundEffectController --> PlayerController
+RadioController --> UIManager
+CollisionController --> GameManager
+CollisionController --> SoundEffectController
+CollisionController --> BackGroundManager
+CollisionController --> ObstacleGenerator
 MonoBehaviour <|-- GameManager
 MonoBehaviour <|-- BiomeManager
 MonoBehaviour <|-- PlayerController
@@ -93,4 +102,6 @@ MonoBehaviour <|-- BackGroundManager
 MonoBehaviour <|-- ObstacleGenerator
 MonoBehaviour <|-- UIManager
 @enduml
+
 ```
+
