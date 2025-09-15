@@ -1,0 +1,5 @@
+![alt text](Start.png)
+![alt text](Bioms.png)
+![alt text](Game.png)
+![alt text](Died.png)
+![alt text](Pause.png)
