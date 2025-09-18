@@ -1,34 +1,3 @@
-## User Story: Offline dínós játék indítása és játszása
+#### User story
 
-Mint internetkapcsolat nélküli felhasználó (pl. János bácsi), szeretném, hogy a Chrome böngészőben a dínós játék automatikusan elérhető legyen, és a szóköz megnyomásával azonnal el tudjam indítani, hogy kapcsolat nélkül is szórakozhassak, amíg az internet helyreáll.
-
-### Elfogadási kritériumok (Given/When/Then)
-- Given: Nincs internetkapcsolat, a felhasználó megnyitja a Chrome-ot és egy `ERR_INTERNET_DISCONNECTED` hibát lát dínó ikonnal.
-	When: A felhasználó megnyomja a `Space` vagy `Fel nyíl` billentyűt.
-	Then: A játék teljes képernyős sávban elindul, a dínó futni kezd, és megjelenik a pontszámláló 0-ról indulva.
-
-- Given: A játék fut és kaktusz akadály közeledik.
-	When: A felhasználó megnyomja a `Space` vagy `Fel nyíl` billentyűt.
-	Then: A dínó ugrik, és ha sikerül elkerülni az akadályt, a pontszám növekszik.
-
-- Given: A játék fut és repülő pterodaktilus közeledik különböző magasságon.
-	When: A felhasználó megnyomja a `Le nyíl` billentyűt.
-	Then: A dínó leguggol, és elkerüli az ütközést.
-
-- Given: A dínó akadályba ütközik.
-	When: Ütközés történik.
-	Then: A játék véget ér, megjelenik a Game Over felirat és a végső pontszám; `Space` megnyomásával újrakezdhető.
-
-- Given: Hosszabb ideje fut a játék.
-	When: A sebesség idővel növekszik és a háttér nappal/éjszaka váltakozik.
-	Then: A játékmenet fokozatosan nehezedik, a pontszám folyamatosan nő, és 100 pontonként hangjelzés hallható (ha engedélyezett).
-
-### Nem funkcionális követelmények
-- Teljesítmény: Indítás billentyűre < 100 ms késleltetéssel reagál.
-- Hozzáférhetőség: Billentyűvezérlés működik egér nélkül; kontraszt megfelelő.
-- Stabilitás: A játék hibamentesen újraindítható Game Over után.
-- Offline: Internetkapcsolat nélkül is elérhető a hibaképernyőről.
-
-### Megjegyzések
-- Támogatott billentyűk: `Space`, `Fel nyíl` (ugrás), `Le nyíl` (guggolás).
-- Cél: Rövid, casual élmény várakozás közben; nem igényel beállítást.
+János bácsi egy hosszú és unalmas nap után leült a számítógépe elé és bekapcsolta a játékot. Miután betöltött a játék, a főmenüben rányom a Start gombra. Erősen gondolkozik hogy melyik biom-ot válassza az almenüben, majd határozottan kattint a bal oldali biomra. A pálya betölt, és egyből életre kel körülötte. A dínó elkezd szaladni, Jánosbá ugrik egyet kettőt, csak hogy ráérezzen. Ez a játék a kedvence az egész világon. Amint megjelenik a képernyő jobb oldalán az első akadály, rögtön beindulnak az ösztönök és ugrik. Siker! Az első akadály át lett ugorva, és innen már csak keményebb lesz. A kövek, fák és egyéb átugrandó akadályok csak jönnek és jönnek, és Jánosbának egyre jobban kell koncentrálnia. Egyszer csak egy különösen szemét szikla beleakad János bácsi dínójának lábkörmébe, és ezzel véget ér a run; Játék vége. János bácsi vigasztalhatatlanul szomorú hiszen csak egy pontot kellett vona szereznie és megdönti a rekordját. Rányom tehát a Quit gombra, a program bezáródik és ezzel befejezte a játékot mára.
