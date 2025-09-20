@@ -57,3 +57,5 @@ High score: Legmagasabb elért pontszám.
 Endless runner: Egy videojáték műfaj, amelyben a játékos karaktere folyamatosan halad előre, és a cél az, hogy minél tovább túlélj anélkül, hogy nekiütköznél akadályoknak vagy meghalnál.
 
 8-bit: Játékokban és művészetekben egy retró, pixeles, egyszerű stílust jelöl.
+
+Sprite: A sprite egy 2D-s grafikai elem (kép vagy animáció), amelyet a játékban önálló objektumként jelenítenek meg, például karakter, tárgy vagy háttérelem.
