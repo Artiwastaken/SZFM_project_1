@@ -1,5 +1,5 @@
 
-![alt](Images/UMLClassDiagram2.png)
+![alt](/Images/UMLClassDiagram2.png)
 
 #### PlantUML Script:
 ```

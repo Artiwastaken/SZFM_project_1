@@ -1,6 +1,6 @@
 
 
-![alt text](Images/usecase.png)
+![alt text](/Images/usecase.png)
  
 @startuml
 top to bottom direction
