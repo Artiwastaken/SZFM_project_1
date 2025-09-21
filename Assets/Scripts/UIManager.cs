@@ -5,33 +5,43 @@ using System.Collections;
 public class NewMonoBehaviourScript : MonoBehaviour
 {
     private GameObject background;
-    private GameObject ground;
     [SerializeField] TextMeshProUGUI starterText;
-    [SerializeField] GameObject starterButton;
-    [SerializeField] GameObject quitButton;
+    [SerializeField] GameObject starterStartButton;
+    [SerializeField] GameObject starterQuitButton;
+
     [SerializeField] GameObject player;
     [SerializeField] GameObject radioButtonLeft;
     [SerializeField] GameObject radioButtonRight;
+
     [SerializeField] TextMeshProUGUI biomText;
     [SerializeField] GameObject biom1;
     [SerializeField] GameObject biom2;
-    [SerializeField] TextMeshProUGUI restartText;
-    [SerializeField] GameObject restartButton;
+
+    [SerializeField] TextMeshProUGUI gameOverText;
+    [SerializeField] GameObject gameOverMenuButton;
+    [SerializeField] GameObject gameOverRestartButton;
+    [SerializeField] GameObject gameOverQuitButton;
+
+    [SerializeField] TextMeshProUGUI pauseText;
+    [SerializeField] GameObject pausequitButton;
+    [SerializeField] GameObject pauseresumeButton;
+    [SerializeField] GameObject pausemenuButton;
+    [SerializeField] GameObject pauserestartButton;
+
     [SerializeField] TextMeshProUGUI scoreText;
     [SerializeField] TextMeshProUGUI highScoreText;
     int score;
     int highScore;
     public static bool isPaused = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public void Start()
     {
         background = GameObject.FindWithTag("BackGround");
 
-        player.GetComponent<PlayerController>().enabled = false;
-        background.GetComponent<BackgroundManager>().enabled = false;
-
-        starterButton.gameObject.SetActive(true);
-        quitButton.gameObject.SetActive(true);
+        backGroundStop();
+        starterText.gameObject.SetActive(true);
+        starterStartButton.gameObject.SetActive(true);
+        starterQuitButton.gameObject.SetActive(true);
         player.gameObject.SetActive(false);
         radioButtonLeft.gameObject.SetActive(false);
         radioButtonRight.gameObject.SetActive(false);
@@ -40,15 +50,24 @@ public class NewMonoBehaviourScript : MonoBehaviour
         biomText.gameObject.SetActive(false);
         biom1.gameObject.SetActive(false);
         biom2.gameObject.SetActive(false);
-        restartText.gameObject.SetActive(false);
-        restartButton.gameObject.SetActive(false);
+        gameOverText.gameObject.SetActive(false);
+        gameOverRestartButton.gameObject.SetActive(false);
+        gameOverMenuButton.gameObject.SetActive(false);
+        gameOverQuitButton.gameObject.SetActive(false);
+        pauseText.gameObject.SetActive(false);
+        pausequitButton.gameObject.SetActive(false);
+        pausemenuButton.gameObject.SetActive(false);
+        pauseresumeButton.gameObject.SetActive(false);
+        pauserestartButton.gameObject.SetActive(false);
+        score = 0;
+        isPaused = false;
 
     }
 
     public void BiomSelector()
     {
-        starterButton.gameObject.SetActive(false);
-        quitButton.gameObject.SetActive(false);
+        starterStartButton.gameObject.SetActive(false);
+        starterQuitButton.gameObject.SetActive(false);
         starterText.gameObject.SetActive(false);
         biomText.gameObject.SetActive(true);
         biom1.gameObject.SetActive(true);
@@ -57,7 +76,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
 
     public void QuitApp()
     {
-        Debug.Log("Kilépés a játékból..."); // Csak fejlesztés közben látszik
+        Debug.Log("Kilépés a játékból...");
         Application.Quit();
     }
 
@@ -69,11 +88,10 @@ public class NewMonoBehaviourScript : MonoBehaviour
         player.gameObject.SetActive(true);
         radioButtonLeft.gameObject.SetActive(true);
         radioButtonRight.gameObject.SetActive(true);
-        player.GetComponent<PlayerController>().enabled = true;
-        background.GetComponent<BackgroundManager>().enabled = true;
-        StartCoroutine(AddScore());
         scoreText.gameObject.SetActive(true);
         highScoreText.gameObject.SetActive(true);
+        StartCoroutine(AddScore());
+        BackGroundStart();
     }
 
     public void ForestSelector()
@@ -89,22 +107,34 @@ public class NewMonoBehaviourScript : MonoBehaviour
 
     public void RestartGame()
     {
-        biomText.gameObject.SetActive(true);
-        biom1.gameObject.SetActive(true);
-        biom2.gameObject.SetActive(true);
-        restartText.gameObject.SetActive(false);
-        restartButton.gameObject.SetActive(false);
+        biomText.gameObject.SetActive(false);
+        biom1.gameObject.SetActive(false);
+        biom2.gameObject.SetActive(false);
+        gameOverText.gameObject.SetActive(false);
+        gameOverRestartButton.gameObject.SetActive(false);
         score = 0;
+        pauseText.gameObject.SetActive(false);
+        gameOverQuitButton.gameObject.SetActive(false);
+        gameOverMenuButton.gameObject.SetActive(false);
+        pausemenuButton.gameObject.SetActive(false);
+        pauseresumeButton.gameObject.SetActive(false);
+        pauserestartButton.gameObject.SetActive(false);
+        pausequitButton.gameObject.SetActive(false);
+        isPaused = false;
+        StartCoroutine(AddScore());
+        BackGroundStart();
 
     }
 
     void GameOver() 
     {
-        player.GetComponent<PlayerController>().enabled = false;
-        background.GetComponent<BackgroundManager>().enabled = false;
-        restartText.gameObject.SetActive(true);
-        restartButton.gameObject.SetActive(true);
+        backGroundStop();
+        gameOverText.gameObject.SetActive(true);
+        gameOverRestartButton.gameObject.SetActive(true);
         StopAllCoroutines();
+        gameOverMenuButton.gameObject.SetActive(true);
+        gameOverQuitButton.gameObject.SetActive(true);
+
     }
 
     IEnumerator AddScore()
@@ -145,17 +175,38 @@ public class NewMonoBehaviourScript : MonoBehaviour
 
     public void Resume()
     {
-        
-        Time.timeScale = 1f;          // Játék folytatódik
         isPaused = false;
+        pauserestartButton.gameObject.SetActive(false);
+        pauseText.gameObject.SetActive(false);
+        pausequitButton.gameObject.SetActive(false);
+        pausemenuButton.gameObject.SetActive(false);
+        pauseresumeButton.gameObject.SetActive(false);
+        StartCoroutine(AddScore());
+        BackGroundStart();
+
+
     }
 
     void Pause()
     {
-        
-        Time.timeScale = 0f;         // Játék megáll
         isPaused = true;
+        pauserestartButton.gameObject.SetActive(true);
+        pauseText.gameObject.SetActive(true);
+        pausequitButton.gameObject.SetActive(true);
+        pausemenuButton.gameObject.SetActive(true);
+        pauseresumeButton.gameObject.SetActive(true);
+        StopAllCoroutines();
+        backGroundStop();
 
     }
-    
+
+    private void backGroundStop() {
+        player.GetComponent<PlayerController>().enabled = false;
+        background.GetComponent<BackgroundManager>().enabled = false;
+    }
+    private void BackGroundStart() {
+        player.GetComponent<PlayerController>().enabled = true;
+        background.GetComponent<BackgroundManager>().enabled = true;
+    }
+
 }
