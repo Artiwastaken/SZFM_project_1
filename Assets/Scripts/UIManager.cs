@@ -1,6 +1,5 @@
 using TMPro;
 using UnityEngine;
-using System.Collections;
 
 public class NewMonoBehaviourScript : MonoBehaviour
 {
@@ -30,14 +29,14 @@ public class NewMonoBehaviourScript : MonoBehaviour
 
     [SerializeField] TextMeshProUGUI scoreText;
     [SerializeField] TextMeshProUGUI highScoreText;
-    int score;
+
+    float score;
     int highScore;
     public static bool isPaused = false;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
     public void Start()
     {
         background = GameObject.FindWithTag("BackGround");
-
         backGroundStop();
         starterText.gameObject.SetActive(true);
         starterStartButton.gameObject.SetActive(true);
@@ -59,9 +58,10 @@ public class NewMonoBehaviourScript : MonoBehaviour
         pausemenuButton.gameObject.SetActive(false);
         pauseresumeButton.gameObject.SetActive(false);
         pauserestartButton.gameObject.SetActive(false);
-        score = 0;
+        score = 0f;
         isPaused = false;
-
+        highScore = PlayerPrefs.GetInt("HighScore", 0);
+        UpdateUI();
     }
 
     public void BiomSelector()
@@ -76,6 +76,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
 
     public void QuitApp()
     {
+        CheckHighScore();
         Debug.Log("Kilépés a játékból...");
         Application.Quit();
     }
@@ -90,10 +91,8 @@ public class NewMonoBehaviourScript : MonoBehaviour
         radioButtonRight.gameObject.SetActive(true);
         scoreText.gameObject.SetActive(true);
         highScoreText.gameObject.SetActive(true);
-        StartCoroutine(AddScore());
         BackGroundStart();
     }
-
     public void ForestSelector()
     {
         Selection();
@@ -104,15 +103,15 @@ public class NewMonoBehaviourScript : MonoBehaviour
         Selection();
     }
 
-
     public void RestartGame()
     {
+        CheckHighScore();
+        score = 0;
         biomText.gameObject.SetActive(false);
         biom1.gameObject.SetActive(false);
         biom2.gameObject.SetActive(false);
         gameOverText.gameObject.SetActive(false);
         gameOverRestartButton.gameObject.SetActive(false);
-        score = 0;
         pauseText.gameObject.SetActive(false);
         gameOverQuitButton.gameObject.SetActive(false);
         gameOverMenuButton.gameObject.SetActive(false);
@@ -121,57 +120,41 @@ public class NewMonoBehaviourScript : MonoBehaviour
         pauserestartButton.gameObject.SetActive(false);
         pausequitButton.gameObject.SetActive(false);
         isPaused = false;
-        StartCoroutine(AddScore());
         BackGroundStart();
-
+        UpdateUI();
     }
 
-    void GameOver() 
+    void GameOver()
     {
         backGroundStop();
+        CheckHighScore();
+
         gameOverText.gameObject.SetActive(true);
         gameOverRestartButton.gameObject.SetActive(true);
         StopAllCoroutines();
         gameOverMenuButton.gameObject.SetActive(true);
         gameOverQuitButton.gameObject.SetActive(true);
-
     }
 
-    IEnumerator AddScore()
-    {
-        while (true)
-        {
-            score += 15;
-            yield return new WaitForSeconds(0.1f);
-        }
-    }
-    // Update is called once per frame
+
     void Update()
     {
-        scoreText.SetText("Score:{0}", score);
-        highScoreText.SetText("Highscore: {0}", highScore);
-        if (score > highScore)
-        {
-            highScore = score;
-
-        }
+        score += Time.deltaTime * 10f;
+        CheckHighScore();
+        UpdateUI();
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (isPaused)
-            {
-                Resume();
-            }
-            else
-            {
-                Pause();
-            }
+            if (isPaused) Resume();
+            else Pause();
         }
+
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             GameOver();
         }
     }
+
 
     public void Resume()
     {
@@ -181,32 +164,45 @@ public class NewMonoBehaviourScript : MonoBehaviour
         pausequitButton.gameObject.SetActive(false);
         pausemenuButton.gameObject.SetActive(false);
         pauseresumeButton.gameObject.SetActive(false);
-        StartCoroutine(AddScore());
         BackGroundStart();
+    }
 
+    public void CheckHighScore()
+    {
+        int roundedScore = Mathf.FloorToInt(score);
+        if (roundedScore > highScore)
+        {
+            highScore = roundedScore;
+            PlayerPrefs.SetInt("HighScore", highScore);
+            PlayerPrefs.Save();
+        }
+    }
 
+    void UpdateUI()
+    {
+        scoreText.SetText("Score: {0}", Mathf.FloorToInt(score));
+        highScoreText.SetText("Highscore: {0}", highScore);
     }
 
     void Pause()
     {
+        CheckHighScore();
         isPaused = true;
         pauserestartButton.gameObject.SetActive(true);
         pauseText.gameObject.SetActive(true);
         pausequitButton.gameObject.SetActive(true);
         pausemenuButton.gameObject.SetActive(true);
         pauseresumeButton.gameObject.SetActive(true);
-        StopAllCoroutines();
-        backGroundStop();
-
+        Time.timeScale = 0f;
     }
 
-    private void backGroundStop() {
-        player.GetComponent<PlayerController>().enabled = false;
-        background.GetComponent<BackgroundManager>().enabled = false;
-    }
-    private void BackGroundStart() {
-        player.GetComponent<PlayerController>().enabled = true;
-        background.GetComponent<BackgroundManager>().enabled = true;
+    private void backGroundStop()
+    {
+        Time.timeScale = 0f;
     }
 
+    private void BackGroundStart()
+    {
+        Time.timeScale = 1f;
+    }
 }
