@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class NewMonoBehaviourScript : MonoBehaviour
 {
@@ -30,7 +31,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
 
     [SerializeField] TextMeshProUGUI scoreText;
     [SerializeField] TextMeshProUGUI highScoreText;
-    int score;
+    int score = 0;
     int highScore;
     public static bool isPaused = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -42,23 +43,32 @@ public class NewMonoBehaviourScript : MonoBehaviour
         starterText.gameObject.SetActive(true);
         starterStartButton.gameObject.SetActive(true);
         starterQuitButton.gameObject.SetActive(true);
+
         player.gameObject.SetActive(false);
+
         radioButtonLeft.gameObject.SetActive(false);
         radioButtonRight.gameObject.SetActive(false);
+
         scoreText.gameObject.SetActive(false);
         highScoreText.gameObject.SetActive(false);
+        highScoreText.SetText("HighScore: " + LoadHighScore().ToString());
+
         biomText.gameObject.SetActive(false);
         biom1.gameObject.SetActive(false);
         biom2.gameObject.SetActive(false);
+
         gameOverText.gameObject.SetActive(false);
         gameOverRestartButton.gameObject.SetActive(false);
         gameOverMenuButton.gameObject.SetActive(false);
         gameOverQuitButton.gameObject.SetActive(false);
+
         pauseText.gameObject.SetActive(false);
         pausequitButton.gameObject.SetActive(false);
+
         pausemenuButton.gameObject.SetActive(false);
         pauseresumeButton.gameObject.SetActive(false);
         pauserestartButton.gameObject.SetActive(false);
+
         score = 0;
         isPaused = false;
 
@@ -107,6 +117,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
 
     public void RestartGame()
     {
+        /*
         biomText.gameObject.SetActive(false);
         biom1.gameObject.SetActive(false);
         biom2.gameObject.SetActive(false);
@@ -123,6 +134,8 @@ public class NewMonoBehaviourScript : MonoBehaviour
         isPaused = false;
         StartCoroutine(AddScore());
         BackGroundStart();
+        */
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 
     }
 
@@ -134,6 +147,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
         StopAllCoroutines();
         gameOverMenuButton.gameObject.SetActive(true);
         gameOverQuitButton.gameObject.SetActive(true);
+        SaveHighScore(score);
 
     }
 
@@ -145,16 +159,26 @@ public class NewMonoBehaviourScript : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
         }
     }
+
+    public void SaveHighScore(int score)
+    {
+        int highScore = PlayerPrefs.GetInt("HighScore", 0);
+        if (score > highScore)
+        {
+            PlayerPrefs.SetInt("HighScore", score);
+            PlayerPrefs.Save();
+        }
+    }
+    public int LoadHighScore()
+    {
+        return PlayerPrefs.GetInt("HighScore", 0);
+    }
     // Update is called once per frame
     void Update()
     {
         scoreText.SetText("Score:{0}", score);
-        highScoreText.SetText("Highscore: {0}", highScore);
-        if (score > highScore)
-        {
-            highScore = score;
-
-        }
+        //highScoreText.SetText("Highscore: {0}", highScore);
+        
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
