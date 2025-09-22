@@ -141,7 +141,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
     {
         while (true)
         {
-            score += 15;
+            score += 1;
             yield return new WaitForSeconds(0.1f);
         }
     }
@@ -197,16 +197,19 @@ public class NewMonoBehaviourScript : MonoBehaviour
         pauseresumeButton.gameObject.SetActive(true);
         StopAllCoroutines();
         backGroundStop();
+        
 
     }
 
     private void backGroundStop() {
-        player.GetComponent<PlayerController>().enabled = false;
-        background.GetComponent<BackgroundManager>().enabled = false;
+        //player.GetComponent<PlayerController>().enabled = false;
+        //background.GetComponent<BackgroundManager>().enabled = false;
+        Time.timeScale = 0;
     }
     private void BackGroundStart() {
-        player.GetComponent<PlayerController>().enabled = true;
-        background.GetComponent<BackgroundManager>().enabled = true;
+        //player.GetComponent<PlayerController>().enabled = true;
+        //background.GetComponent<BackgroundManager>().enabled = true;
+        Time.timeScale = 1;
     }
 
 }
