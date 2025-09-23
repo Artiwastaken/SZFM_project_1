@@ -4861,7 +4861,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clips:
-  - {fileID: 8300000, guid: aeabb2255d86f48428d2e47aec812ff1, type: 3}
+  - {fileID: 8300000, guid: 4db3b9fdbeb5227428c09262e40ffa81, type: 3}
+  - {fileID: 8300000, guid: 1c1bde476e0a78f4db613ce1fcb1b641, type: 3}
+  - {fileID: 8300000, guid: c7850860e0acfef4d89689619108ca2d, type: 3}
+  - {fileID: 8300000, guid: 52286787707b71f4eb438b5a45992d32, type: 3}
   radioButtons: {fileID: 1623391454}
 --- !u!1 &1797038815
 GameObject:

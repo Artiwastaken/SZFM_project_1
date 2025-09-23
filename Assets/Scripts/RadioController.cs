@@ -18,14 +18,14 @@ public class RadioController : MonoBehaviour
     }
     public void IncreaseClipCounter()
     {
-        if (clipCounter != clips.Length)
+        if (clipCounter != clips.Length-1)
         {
-            //clipCounter++;
+            clipCounter++;
             audioSource.clip = clips[clipCounter];
         }
         else
         {
-            //clipCounter = 0;
+            clipCounter = 0;
             audioSource.clip = clips[clipCounter];
         }
         audioSource.Play();
@@ -34,12 +34,12 @@ public class RadioController : MonoBehaviour
     {
         if (clipCounter != 0)
         {
-            //clipCounter--;
+            clipCounter--;
             audioSource.clip = clips[clipCounter];
         }
         else
         {
-            //clipCounter = clips.Length;
+            clipCounter = clips.Length-1;
             audioSource.clip = clips[clipCounter];
         }
         audioSource.Play();
