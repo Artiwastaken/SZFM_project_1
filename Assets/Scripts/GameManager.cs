@@ -5,7 +5,7 @@ public class GameManager : MonoBehaviour
 {
     public float score;
     public int highScore;
-    public float speed = 1;
+    public float speed;
     public bool isForest = false;
     UImanager uiManager;
     bool isPaused = false;
@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
         score = 0f;
         backGroundStop();
         highScore = PlayerPrefs.GetInt("HighScore", 0);
+        speed = 5;
     }
 
 
