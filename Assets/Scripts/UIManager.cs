@@ -32,7 +32,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
 
     float score;
     int highScore;
-    public static bool isPaused = false;
+    public bool isPaused = false;
 
     public void Start()
     {
