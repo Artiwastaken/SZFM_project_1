@@ -3,211 +3,189 @@ using UnityEngine;
 
 public class UImanager : MonoBehaviour
 {
-    private GameObject background;
+    GameManager gameManager;
+    
     [SerializeField] TextMeshProUGUI starterText;
     [SerializeField] GameObject starterStartButton;
     [SerializeField] GameObject starterQuitButton;
-
+   
     [SerializeField] GameObject player;
+    
     [SerializeField] GameObject radioButtonLeft;
     [SerializeField] GameObject radioButtonRight;
-
+    
     [SerializeField] TextMeshProUGUI biomText;
     [SerializeField] GameObject biom1;
     [SerializeField] GameObject biom2;
-
+    
     [SerializeField] TextMeshProUGUI gameOverText;
     [SerializeField] GameObject gameOverMenuButton;
     [SerializeField] GameObject gameOverRestartButton;
     [SerializeField] GameObject gameOverQuitButton;
-
+    
     [SerializeField] TextMeshProUGUI pauseText;
     [SerializeField] GameObject pausequitButton;
     [SerializeField] GameObject pauseresumeButton;
     [SerializeField] GameObject pausemenuButton;
     [SerializeField] GameObject pauserestartButton;
-
+   
     [SerializeField] TextMeshProUGUI scoreText;
     [SerializeField] TextMeshProUGUI highScoreText;
+   
 
-    float score;
-    int highScore;
-    public bool isPaused = false;
-    public float speed = 1;
-    public bool isForest = false;
+    //public bool isPaused = false;
+    
 
     public void Start()
     {
-        background = GameObject.FindWithTag("BackGround");
-        backGroundStop();
-        starterText.gameObject.SetActive(true);
-        starterStartButton.gameObject.SetActive(true);
-        starterQuitButton.gameObject.SetActive(true);
-        player.gameObject.SetActive(false);
-        radioButtonLeft.gameObject.SetActive(false);
-        radioButtonRight.gameObject.SetActive(false);
-        scoreText.gameObject.SetActive(false);
-        highScoreText.gameObject.SetActive(false);
-        biomText.gameObject.SetActive(false);
-        biom1.gameObject.SetActive(false);
-        biom2.gameObject.SetActive(false);
-        gameOverText.gameObject.SetActive(false);
-        gameOverRestartButton.gameObject.SetActive(false);
-        gameOverMenuButton.gameObject.SetActive(false);
-        gameOverQuitButton.gameObject.SetActive(false);
-        pauseText.gameObject.SetActive(false);
-        pausequitButton.gameObject.SetActive(false);
-        pausemenuButton.gameObject.SetActive(false);
-        pauseresumeButton.gameObject.SetActive(false);
-        pauserestartButton.gameObject.SetActive(false);
-        score = 0f;
-        isPaused = false;
-        highScore = PlayerPrefs.GetInt("HighScore", 0);
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+       
+        gameManager.backGroundStop();
+       
+        EnableStarterUI();
+       
+        HidePlayer();
+      
+        DisableRadioUI();
+        
+        DisableScoreUI();
+       
+        DisableBiomUI();
+       
+        DisableGameOverUI();
+       
+        DisablePauseUI();
+     
         UpdateUI();
     }
 
     public void BiomSelector()
     {
+        
+        DisableStarterUI();
+        EnableBiomUI();
+    }
+
+    public void QuitApp()
+    {
+        gameManager.CheckHighScore();
+        Debug.Log("Kilépés a játékból...");
+        Application.Quit();
+    }
+
+    public void Selection()
+    {
+        DisableBiomUI();
+        ShowPlayer();
+        EnableRadioUI();
+        EnableScoreUI();
+        gameManager.BackGroundStart();
+    }
+
+    //#################UIMANAGERRESZ##########################X
+
+    public void DisableStarterUI()
+    {
+        starterText.gameObject.SetActive(false);
         starterStartButton.gameObject.SetActive(false);
         starterQuitButton.gameObject.SetActive(false);
-        starterText.gameObject.SetActive(false);
+    }
+    public void EnableStarterUI()
+    {
+        starterText.gameObject.SetActive(true);
+        starterStartButton.gameObject.SetActive(true);
+        starterQuitButton.gameObject.SetActive(true);
+    }
+
+
+    public void HidePlayer()
+    {
+        player.gameObject.SetActive(false);
+    }
+    public void ShowPlayer()
+    {
+        player.gameObject.SetActive(true);
+    }
+    public void DisableRadioUI()
+    {
+        radioButtonLeft.gameObject.SetActive(false);
+        radioButtonRight.gameObject.SetActive(false);
+    }
+    public void EnableRadioUI()
+    {
+        radioButtonLeft.gameObject.SetActive(true);
+        radioButtonRight.gameObject.SetActive(true);
+    }
+
+    public void DisableBiomUI()
+    {
+        biomText.gameObject.SetActive(false);
+        biom1.gameObject.SetActive(false);
+        biom2.gameObject.SetActive(false);
+    }
+    public void EnableBiomUI()
+    {
         biomText.gameObject.SetActive(true);
         biom1.gameObject.SetActive(true);
         biom2.gameObject.SetActive(true);
     }
 
-    public void QuitApp()
+    public void DisableGameOverUI()
     {
-        CheckHighScore();
-        Debug.Log("Kilépés a játékból...");
-        Application.Quit();
-    }
-
-    private void Selection()
-    {
-        biomText.gameObject.SetActive(false);
-        biom1.gameObject.SetActive(false);
-        biom2.gameObject.SetActive(false);
-        player.gameObject.SetActive(true);
-        radioButtonLeft.gameObject.SetActive(true);
-        radioButtonRight.gameObject.SetActive(true);
-        scoreText.gameObject.SetActive(true);
-        highScoreText.gameObject.SetActive(true);
-        BackGroundStart();
-    }
-    public void ForestSelector()
-    {
-        Selection();
-        isForest = true;
-
-    }
-
-    public void DesertSelector()
-    {
-        Selection();
-        isForest = false;
-    }
-
-    public void RestartGame()
-    {
-        CheckHighScore();
-        score = 0;
-        biomText.gameObject.SetActive(false);
-        biom1.gameObject.SetActive(false);
-        biom2.gameObject.SetActive(false);
         gameOverText.gameObject.SetActive(false);
         gameOverRestartButton.gameObject.SetActive(false);
-        pauseText.gameObject.SetActive(false);
-        gameOverQuitButton.gameObject.SetActive(false);
         gameOverMenuButton.gameObject.SetActive(false);
+        gameOverQuitButton.gameObject.SetActive(false);
+    }
+    public void EnableGameOverUI()
+    {
+        gameOverText.gameObject.SetActive(true);
+        gameOverRestartButton.gameObject.SetActive(true);
+        gameOverMenuButton.gameObject.SetActive(true);
+        gameOverQuitButton.gameObject.SetActive(true);
+    }
+
+    public void DisablePauseUI()
+    {
+        pauseText.gameObject.SetActive(false);
+        pausequitButton.gameObject.SetActive(false);
         pausemenuButton.gameObject.SetActive(false);
         pauseresumeButton.gameObject.SetActive(false);
         pauserestartButton.gameObject.SetActive(false);
-        pausequitButton.gameObject.SetActive(false);
-        isPaused = false;
-        BackGroundStart();
-        UpdateUI();
+    }
+    public void EnablePauseUI()
+    {
+        pauseText.gameObject.SetActive(true);
+        pausequitButton.gameObject.SetActive(true);
+        pausemenuButton.gameObject.SetActive(true);
+        pauseresumeButton.gameObject.SetActive(true);
+        pauserestartButton.gameObject.SetActive(true);
     }
 
-    void GameOver()
+    public void DisableScoreUI()
     {
-        backGroundStop();
-        CheckHighScore();
-
-        gameOverText.gameObject.SetActive(true);
-        gameOverRestartButton.gameObject.SetActive(true);
-        StopAllCoroutines();
-        gameOverMenuButton.gameObject.SetActive(true);
-        gameOverQuitButton.gameObject.SetActive(true);
+        scoreText.gameObject.SetActive(false);
+        highScoreText.gameObject.SetActive(false);
+    }
+    public void EnableScoreUI()
+    {
+        scoreText.gameObject.SetActive(true);
+        highScoreText.gameObject.SetActive(true);
     }
 
 
     void Update()
     {
-        score += Time.deltaTime * 10f;
-        CheckHighScore();
+        gameManager.CheckHighScore();
         UpdateUI();
-
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (isPaused) Resume();
-            else Pause();
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            GameOver();
-        }
     }
 
-
-    public void Resume()
+    
+    public void UpdateUI()
     {
-        isPaused = false;
-        pauserestartButton.gameObject.SetActive(false);
-        pauseText.gameObject.SetActive(false);
-        pausequitButton.gameObject.SetActive(false);
-        pausemenuButton.gameObject.SetActive(false);
-        pauseresumeButton.gameObject.SetActive(false);
-        BackGroundStart();
+        scoreText.SetText("Score: {0}", Mathf.FloorToInt(gameManager.score));
+        highScoreText.SetText("Highscore: {0}", gameManager.highScore);
     }
 
-    public void CheckHighScore()
-    {
-        int roundedScore = Mathf.FloorToInt(score);
-        if (roundedScore > highScore)
-        {
-            highScore = roundedScore;
-            PlayerPrefs.SetInt("HighScore", highScore);
-            PlayerPrefs.Save();
-        }
-    }
-
-    void UpdateUI()
-    {
-        scoreText.SetText("Score: {0}", Mathf.FloorToInt(score));
-        highScoreText.SetText("Highscore: {0}", highScore);
-    }
-
-    void Pause()
-    {
-        CheckHighScore();
-        isPaused = true;
-        pauserestartButton.gameObject.SetActive(true);
-        pauseText.gameObject.SetActive(true);
-        pausequitButton.gameObject.SetActive(true);
-        pausemenuButton.gameObject.SetActive(true);
-        pauseresumeButton.gameObject.SetActive(true);
-        Time.timeScale = 0f;
-    }
-
-    private void backGroundStop()
-    {
-        Time.timeScale = 0f;
-    }
-
-    private void BackGroundStart()
-    {
-        Time.timeScale = 1f;
-    }
+    
 }

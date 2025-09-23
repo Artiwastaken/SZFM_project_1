@@ -1288,8 +1288,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 341569256}
-        m_TargetAssemblyTypeName: NewMonoBehaviourScript, Assembly-CSharp
+      - m_Target: {fileID: 1736754283}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: RestartGame
         m_Mode: 1
         m_Arguments:
@@ -1485,7 +1485,7 @@ GameObject:
   - component: {fileID: 341569255}
   - component: {fileID: 341569256}
   m_Layer: 0
-  m_Name: GameManager
+  m_Name: UiManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1538,9 +1538,6 @@ MonoBehaviour:
   pauserestartButton: {fileID: 305056792}
   scoreText: {fileID: 29740418}
   highScoreText: {fileID: 78396971}
-  isPaused: 0
-  speed: 1
-  isForest: 0
 --- !u!1 &403795904
 GameObject:
   m_ObjectHideFlags: 0
@@ -2370,8 +2367,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 341569256}
-        m_TargetAssemblyTypeName: NewMonoBehaviourScript, Assembly-CSharp
+      - m_Target: {fileID: 1736754283}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: ForestSelector
         m_Mode: 1
         m_Arguments:
@@ -4477,8 +4474,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 341569256}
-        m_TargetAssemblyTypeName: NewMonoBehaviourScript, Assembly-CSharp
+      - m_Target: {fileID: 1736754283}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: DesertSelector
         m_Mode: 1
         m_Arguments:
@@ -4833,6 +4830,54 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1727791649}
   m_CullTransparentMesh: 1
+--- !u!1 &1736754282
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1736754284}
+  - component: {fileID: 1736754283}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1736754283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1736754282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd0697dc618a0fc4a8384f2a4f228f6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  score: 0
+  highScore: 0
+  speed: 1
+  isForest: 0
+--- !u!4 &1736754284
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1736754282}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 40.30476, y: 1.4974564, z: -0.2629658}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1740507536
 GameObject:
   m_ObjectHideFlags: 0
@@ -5201,8 +5246,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 341569256}
-        m_TargetAssemblyTypeName: NewMonoBehaviourScript, Assembly-CSharp
+      - m_Target: {fileID: 1736754283}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: RestartGame
         m_Mode: 1
         m_Arguments:
@@ -5954,8 +5999,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 341569256}
-        m_TargetAssemblyTypeName: NewMonoBehaviourScript, Assembly-CSharp
+      - m_Target: {fileID: 1736754283}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: Resume
         m_Mode: 1
         m_Arguments:
@@ -6017,3 +6062,4 @@ SceneRoots:
   - {fileID: 2080169723}
   - {fileID: 1740507538}
   - {fileID: 1184569509}
+  - {fileID: 1736754284}

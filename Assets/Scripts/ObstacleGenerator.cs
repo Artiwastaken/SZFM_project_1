@@ -4,16 +4,16 @@ public class ObstacleGenerator : MonoBehaviour
 {
     [SerializeField] GameObject[] forestObstacleList;
     [SerializeField] GameObject[] desertObstacleList;
-    UImanager uiManager;
+    GameManager gameManager;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        uiManager = GameObject.Find("Sensor").GetComponent<UImanager>();
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
     public void OnCollisionEnter2D(Collision2D collision)
     {
         
-        if (uiManager.isForest)
+        if (gameManager.isForest)
         {
 
         }
