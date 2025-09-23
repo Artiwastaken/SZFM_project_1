@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-public class NewMonoBehaviourScript : MonoBehaviour
+public class UImanager : MonoBehaviour
 {
     private GameObject background;
     [SerializeField] TextMeshProUGUI starterText;
@@ -33,6 +33,8 @@ public class NewMonoBehaviourScript : MonoBehaviour
     float score;
     int highScore;
     public bool isPaused = false;
+    public float speed = 1;
+    public bool isForest = false;
 
     public void Start()
     {
@@ -96,11 +98,14 @@ public class NewMonoBehaviourScript : MonoBehaviour
     public void ForestSelector()
     {
         Selection();
+        isForest = true;
+
     }
 
     public void DesertSelector()
     {
         Selection();
+        isForest = false;
     }
 
     public void RestartGame()
