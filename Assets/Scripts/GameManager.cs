@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using static Unity.Burst.Intrinsics.X86;
 
@@ -9,14 +10,19 @@ public class GameManager : MonoBehaviour
     public bool isForest = false;
     UImanager uiManager;
     bool isPaused = false;
+    private ObstacleGenerator obstacleGenerator;
+    public bool isGameActive;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        obstacleGenerator = GameObject.Find("Sensor").GetComponent<ObstacleGenerator>();
         uiManager = GameObject.Find("UiManager").GetComponent<UImanager>();
         score = 0f;
         backGroundStop();
         highScore = PlayerPrefs.GetInt("HighScore", 0);
         speed = 5;
+        isGameActive = false;
+        StartCoroutine(IncreasingSpeed());
     }
 
 
@@ -38,18 +44,34 @@ public class GameManager : MonoBehaviour
     // SELECTIONRESZ ####################################################
     public void ForestSelector()
     {
+        
         uiManager.Selection();
         isForest = true;
+        obstacleGenerator.SpawnForestObstacle();
 
     }
 
     public void DesertSelector()
     {
+        
         uiManager.Selection();
         isForest = false;
+        obstacleGenerator.SpawnDesertObstacle();
     }
 
     // JATEKMENET RESZ ##########################################
+
+    IEnumerator IncreasingSpeed()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(5);
+            if (isGameActive) 
+            { 
+                speed += 2;
+            }
+        }
+    }
 
     public void RestartGame()
     {
@@ -61,6 +83,16 @@ public class GameManager : MonoBehaviour
         isPaused = false;
         BackGroundStart();
         uiManager.UpdateUI();
+        obstacleGenerator.DestroyAllEnemy();
+        if (isForest)
+        {
+            obstacleGenerator.SpawnForestObstacle();
+        }
+        else
+        {
+            obstacleGenerator.SpawnDesertObstacle();
+        }
+        speed = 5;
     }
 
     public void GameOver()
@@ -69,7 +101,8 @@ public class GameManager : MonoBehaviour
         CheckHighScore();
         uiManager.EnableGameOverUI();
         StopAllCoroutines();
-       
+        isGameActive = false;
+
     }
 
     public void Resume()
@@ -77,10 +110,12 @@ public class GameManager : MonoBehaviour
         isPaused = false;
         uiManager.DisablePauseUI();
         BackGroundStart();
+        isGameActive = true;
     }
 
     public void Pause()
     {
+        isGameActive = false;
         CheckHighScore();
         isPaused = true;
         uiManager.EnablePauseUI();
@@ -103,6 +138,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         ScoreUpdater();
+        
         uiManager.UpdateUI();
 
         if (Input.GetKeyDown(KeyCode.Escape))

@@ -31,7 +31,7 @@ public class UImanager : MonoBehaviour
    
     [SerializeField] TextMeshProUGUI scoreText;
     [SerializeField] TextMeshProUGUI highScoreText;
-   
+    ObstacleGenerator obstacleGenerator;
 
     //public bool isPaused = false;
     
@@ -39,6 +39,7 @@ public class UImanager : MonoBehaviour
     public void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        obstacleGenerator = GameObject.Find("Sensor").GetComponent<ObstacleGenerator>();
        
         gameManager.backGroundStop();
        
@@ -57,6 +58,8 @@ public class UImanager : MonoBehaviour
         DisablePauseUI();
      
         UpdateUI();
+        obstacleGenerator.DestroyAllEnemy();
+        gameManager.isGameActive = false;
     }
 
     public void BiomSelector()
@@ -75,6 +78,7 @@ public class UImanager : MonoBehaviour
 
     public void Selection()
     {
+        gameManager.isGameActive = true;
         DisableBiomUI();
         ShowPlayer();
         EnableRadioUI();
