@@ -5,8 +5,10 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody2D playerRB;
     [SerializeField] float jumpForce;
+    [SerializeField] float fallForce;
     [SerializeField] KeyCode jumpKeyCode;
     [SerializeField] KeyCode duckKeyCode;
+    [SerializeField] KeyCode fallKeyCode;
     [SerializeField] Vector2 boxSize;
     [SerializeField] Vector2 colliderBoxSize;
     [SerializeField] float castDistance;
@@ -25,9 +27,13 @@ public class PlayerController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
-        
+        if (Input.GetKey(fallKeyCode))
+        {
+            playerRB.AddForce(-Vector2.up * fallForce, ForceMode2D.Impulse);
+
+        }
         if (Input.GetKeyDown(jumpKeyCode) && isGrounded()) 
         {
             playerRB.AddForce(Vector2.up*jumpForce, ForceMode2D.Impulse);
