@@ -10,35 +10,67 @@ public class ObstacleGenerator : MonoBehaviour
     void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        spawnPoint = new Vector2(12,-3);
+        spawnPoint = new Vector2(12, -3);
+        
+
     }
-    
-    
+
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("trigger");
-        Destroy(collision.gameObject);
-        if (gameManager.isForest)
+        if (collision.CompareTag("Enemy"))
         {
-            SpawnForestObstacle();
+            Destroy(collision.gameObject);
+            if (gameManager.isForest)
+            {
+                SpawnForestObstacle();
+            }
+            else
+            {
+                SpawnDesertObstacle();
+            }
         }
-        else
-        {
-            //SpawnForestObstacle();
-        }
-       
     }
-    
+
     public void SpawnForestObstacle()
     {
         int random = Random.Range(0, forestObstacleList.Length);
-        Instantiate(forestObstacleList[random], spawnPoint, transform.rotation);//.AddComponent<ObstacleMovement>();
-    }
-
-
-    // Update is called once per frame
-    void Update()
-    {
+        int randomSpawnPoint = Random.Range(-3, 0);
+        if (random == 0)
+        {
+            Instantiate(forestObstacleList[0], new Vector2(12,randomSpawnPoint), transform.rotation);
+        }
+        else
+        {
+            Instantiate(forestObstacleList[random], spawnPoint, transform.rotation);
+        }
         
     }
+
+    public void SpawnDesertObstacle()
+    {
+        int random = Random.Range(0, desertObstacleList.Length);
+        int randomSpawnPoint = Random.Range(-3, 0);
+        if (random == 0)
+        {
+            Instantiate(desertObstacleList[0], new Vector2(12, randomSpawnPoint), transform.rotation);
+        }
+        else
+        {
+            Instantiate(desertObstacleList[random], spawnPoint, transform.rotation);
+        }
+
+    }
+    
+    public void DestroyAllEnemy()
+    {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+        for (int i = 0; i < enemies.Length; i++)
+        {
+            Destroy(enemies[i]);
+        }
+        
+    }
+
 }

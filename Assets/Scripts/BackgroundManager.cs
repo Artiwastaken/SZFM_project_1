@@ -4,7 +4,7 @@ public class BackgroundManager : MonoBehaviour
 {
 
     [SerializeField] float speed = 5f;
-    private Vector2 startPos;
+    private Vector3 startPos;
     private float repeatWidth;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created

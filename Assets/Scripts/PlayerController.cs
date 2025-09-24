@@ -18,12 +18,15 @@ public class PlayerController : MonoBehaviour
     private Vector2 startColliderOffset;
     private Vector2 startColliderSize;
 
+    public Vector2 playerStartPosition;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         startColliderOffset = playerBoxCollider.offset;
         startColliderSize = playerBoxCollider.size;
         playerRB = gameObject.GetComponent<Rigidbody2D>();
+        playerStartPosition = transform.position;
     }
 
     // Update is called once per frame
