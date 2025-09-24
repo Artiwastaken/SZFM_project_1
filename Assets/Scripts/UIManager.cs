@@ -60,6 +60,9 @@ public class UImanager : MonoBehaviour
         UpdateUI();
         obstacleGenerator.DestroyAllEnemy();
         gameManager.isGameActive = false;
+        gameManager.speed = 5;
+        gameManager.score = 0;
+        gameManager.isPaused = false;
     }
 
     public void BiomSelector()

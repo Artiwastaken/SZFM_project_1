@@ -9,12 +9,16 @@ public class GameManager : MonoBehaviour
     public float speed;
     public bool isForest = false;
     UImanager uiManager;
-    bool isPaused = false;
+    public bool isPaused = false;
     private ObstacleGenerator obstacleGenerator;
     public bool isGameActive;
+
+    //PlayerController playerController;
+    [SerializeField] GameObject player;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        //playerController = GameObject.Find("Player").GetComponent<PlayerController>();
         obstacleGenerator = GameObject.Find("Sensor").GetComponent<ObstacleGenerator>();
         uiManager = GameObject.Find("UiManager").GetComponent<UImanager>();
         score = 0f;
@@ -93,6 +97,8 @@ public class GameManager : MonoBehaviour
             obstacleGenerator.SpawnDesertObstacle();
         }
         speed = 5;
+        isGameActive = true;
+        player.transform.position= new Vector2(-7.11f, -2.67f);
     }
 
     public void GameOver()
@@ -100,7 +106,6 @@ public class GameManager : MonoBehaviour
         backGroundStop();
         CheckHighScore();
         uiManager.EnableGameOverUI();
-        StopAllCoroutines();
         isGameActive = false;
 
     }
@@ -143,13 +148,8 @@ public class GameManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (isPaused) Resume();
+            if (isPaused) { Resume(); }
             else Pause();
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            GameOver();
         }
 
     }

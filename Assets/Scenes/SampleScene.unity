@@ -4094,7 +4094,7 @@ GameObject:
   - component: {fileID: 1555435840}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4221,6 +4221,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   playerBoxCollider: {fileID: 1555435840}
+  yPoz: 0
 --- !u!61 &1555435840
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4739,6 +4740,8 @@ MonoBehaviour:
   highScore: 0
   speed: 1
   isForest: 0
+  isGameActive: 0
+  player: {fileID: 1555435835}
 --- !u!4 &1736754284
 Transform:
   m_ObjectHideFlags: 0

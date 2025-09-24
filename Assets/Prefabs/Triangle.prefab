@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2892139096826546742}
   - component: {fileID: 1043834407621297923}
   - component: {fileID: -1468487628021230916}
+  - component: {fileID: -4184267841452900720}
   - component: {fileID: -6783116657142226379}
   m_Layer: 0
   m_Name: Triangle
@@ -99,6 +100,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6fe10cb06dd484247870fe29190ecb69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-4184267841452900720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8543726140110594786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 253150da6f3c504449ad0c6166197e64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!60 &-6783116657142226379

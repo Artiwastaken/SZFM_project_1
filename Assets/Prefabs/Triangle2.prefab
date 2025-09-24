@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3686179899522544728}
   - component: {fileID: 8137003139595038586}
   - component: {fileID: 7741421488751423445}
+  - component: {fileID: -8455738673125952989}
   m_Layer: 0
   m_Name: Triangle2
   m_TagString: Enemy
@@ -145,5 +146,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6fe10cb06dd484247870fe29190ecb69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-8455738673125952989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7729765806941251493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 253150da6f3c504449ad0c6166197e64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
