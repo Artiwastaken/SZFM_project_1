@@ -12,13 +12,14 @@ public class GameManager : MonoBehaviour
     public bool isPaused = false;
     private ObstacleGenerator obstacleGenerator;
     public bool isGameActive;
-
-    //PlayerController playerController;
+    public Animator playerAnimator;
+    public BackgroundManager backgroundManagerScript;   
+    
     [SerializeField] GameObject player;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        //playerController = GameObject.Find("Player").GetComponent<PlayerController>();
+        //backgroundManagerScript = GameObject.Find("Background").GetComponent<BackgroundManager>();
         obstacleGenerator = GameObject.Find("Sensor").GetComponent<ObstacleGenerator>();
         uiManager = GameObject.Find("UiManager").GetComponent<UImanager>();
         score = 0f;
@@ -99,15 +100,18 @@ public class GameManager : MonoBehaviour
         speed = 5;
         isGameActive = true;
         player.transform.position= new Vector2(-7.11f, -2.67f);
+        playerAnimator.SetBool("alive", true);
+        backgroundScriptEnable();
     }
 
     public void GameOver()
     {
-        backGroundStop();
+        
         CheckHighScore();
         uiManager.EnableGameOverUI();
         isGameActive = false;
-
+        playerAnimator.SetBool("alive",false);
+        backgroundScriptDisable();
     }
 
     public void Resume()
@@ -127,11 +131,19 @@ public class GameManager : MonoBehaviour
         backGroundStop();
     }
 
-
+    public void backgroundScriptDisable()
+    {
+        backgroundManagerScript.enabled = false;
+    }
+    public void backgroundScriptEnable()
+    {
+        backgroundManagerScript.enabled = true;
+    }
 
     public void backGroundStop()
     {
         Time.timeScale = 0f;
+
     }
 
     public void BackGroundStart()
@@ -142,8 +154,10 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ScoreUpdater();
-        
+        if (isGameActive)
+        {
+            ScoreUpdater();
+        }
         uiManager.UpdateUI();
 
         if (Input.GetKeyDown(KeyCode.Escape))

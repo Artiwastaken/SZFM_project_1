@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] BoxCollider2D playerBoxCollider;
     private Vector2 startColliderOffset;
     private Vector2 startColliderSize;
-
+    public Animator playerAnimator;
     public Vector2 playerStartPosition;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -32,24 +32,31 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
-        if (Input.GetKey(fallKeyCode))
+        if (isGrounded() &&  !Input.GetKey(jumpKeyCode))
+        {
+            playerAnimator.SetBool("jump", false);
+        }
+        if (Input.GetKey(fallKeyCode) && isGrounded()==false)
         {
             playerRB.AddForce(-Vector2.up * fallForce, ForceMode2D.Impulse);
-
+            
         }
         if (Input.GetKeyDown(jumpKeyCode) && isGrounded()) 
         {
+            playerAnimator.SetBool("jump", true);
             playerRB.AddForce(Vector2.up*jumpForce, ForceMode2D.Impulse);
         }
-
+        
         if (Input.GetKey(duckKeyCode) && isGrounded())
         {
+            playerAnimator.SetBool("duck", true);
             playerBoxCollider.size = colliderBoxSize;
             playerBoxCollider.offset = new Vector2 (playerBoxCollider.offset.x,colliderHeight);
 
         }
         else
         {
+            playerAnimator.SetBool("duck", false);
             playerBoxCollider.size = startColliderSize;
             playerBoxCollider.offset = startColliderOffset;
         }

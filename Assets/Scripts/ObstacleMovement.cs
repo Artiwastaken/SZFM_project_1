@@ -15,6 +15,9 @@ public class ObstacleMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        gameObject.transform.Translate(Vector2.left * gameManager.speed * Time.deltaTime);
+        if (gameManager.isGameActive)
+        {
+            gameObject.transform.Translate(Vector2.left * gameManager.speed * Time.deltaTime);
+        }
     }
 }
