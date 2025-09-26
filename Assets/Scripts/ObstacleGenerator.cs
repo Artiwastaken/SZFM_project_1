@@ -35,7 +35,7 @@ public class ObstacleGenerator : MonoBehaviour
     public void SpawnForestObstacle()
     {
         int random = Random.Range(0, forestObstacleList.Length);
-        int randomSpawnPoint = Random.Range(-1, 0);
+        float randomSpawnPoint = Random.Range(-1f, -0.5f);
         if (random == 0)
         {
             Instantiate(forestObstacleList[0], new Vector2(12,randomSpawnPoint), transform.rotation);
@@ -50,7 +50,7 @@ public class ObstacleGenerator : MonoBehaviour
     public void SpawnDesertObstacle()
     {
         int random = Random.Range(0, desertObstacleList.Length);
-        int randomSpawnPoint = Random.Range(-3, 0);
+        float randomSpawnPoint = Random.Range(-1f, -0.5f);
         if (random == 0)
         {
             Instantiate(desertObstacleList[0], new Vector2(12, randomSpawnPoint), transform.rotation);

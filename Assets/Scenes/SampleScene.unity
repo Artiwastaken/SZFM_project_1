@@ -318,8 +318,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4283130294
-  m_fontColor: {r: 0.7137255, g: 0.3803922, b: 0.29411766, a: 1}
+    rgba: 4285833697
+  m_fontColor: {r: 0.882353, g: 0.6313726, b: 0.454902, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -592,8 +592,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4283130294
-  m_fontColor: {r: 0.7137255, g: 0.3803922, b: 0.29411766, a: 1}
+    rgba: 4285833697
+  m_fontColor: {r: 0.882353, g: 0.6313726, b: 0.454902, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1976,6 +1976,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c78e5cd468cf25343babadce068cd3e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  caveBackGround: {fileID: -1077390240725247508, guid: b2fe59b477e492b4998f731ee24fb978, type: 3}
+  forestBackGround: {fileID: 3979830740784129307, guid: 6b10160befe86054799b7990c3c2798b, type: 3}
 --- !u!212 &578994728
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3393,7 +3395,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Biome Desert
+  m_text: Biome Cave
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

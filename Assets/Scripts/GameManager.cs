@@ -53,7 +53,7 @@ public class GameManager : MonoBehaviour
         uiManager.Selection();
         isForest = true;
         obstacleGenerator.SpawnForestObstacle();
-
+        backgroundManagerScript.BackGroundForest();
     }
 
     public void DesertSelector()
@@ -62,6 +62,7 @@ public class GameManager : MonoBehaviour
         uiManager.Selection();
         isForest = false;
         obstacleGenerator.SpawnDesertObstacle();
+        backgroundManagerScript.BackGroundCave();
     }
 
     // JATEKMENET RESZ ##########################################
