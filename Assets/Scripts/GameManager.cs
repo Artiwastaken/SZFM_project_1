@@ -73,7 +73,7 @@ public class GameManager : MonoBehaviour
             yield return new WaitForSeconds(5);
             if (isGameActive) 
             { 
-                speed += 2;
+                speed += 1.5f;
             }
         }
     }

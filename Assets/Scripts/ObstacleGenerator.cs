@@ -10,7 +10,7 @@ public class ObstacleGenerator : MonoBehaviour
     void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        spawnPoint = new Vector2(12, -3);
+        spawnPoint = new Vector2(12, -2.2f);
         
 
     }
@@ -35,7 +35,7 @@ public class ObstacleGenerator : MonoBehaviour
     public void SpawnForestObstacle()
     {
         int random = Random.Range(0, forestObstacleList.Length);
-        int randomSpawnPoint = Random.Range(-3, 0);
+        int randomSpawnPoint = Random.Range(-1, 0);
         if (random == 0)
         {
             Instantiate(forestObstacleList[0], new Vector2(12,randomSpawnPoint), transform.rotation);
